@@ -12,34 +12,6 @@
 
 #include "libft.h"
 
-static char	*ft_get_line(char *left_str)
-{
-	int		i;
-	char	*str;
-
-	i = 0;
-	if (!left_str[i])
-		return (NULL);
-	while (left_str[i] && left_str[i] != '\n')
-		i++;
-	str = (char *)malloc(sizeof(char) * (i + 2));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (left_str[i] && left_str[i] != '\n')
-	{
-		str[i] = left_str[i];
-		i++;
-	}
-	if (left_str[i] == '\n')
-	{
-		str[i] = left_str[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
 static char	*ft_new_left_str(char *left_str)
 {
 	int		i;
@@ -105,13 +77,13 @@ static char	*read_and_append(int fd, char *left_str, char *buf, int *read_size)
 
 static char	*ft_read_to_left_str(int fd, char *left_str)
 {
-	char	*buf = NULL;
+	char	*buf;
 	int		read_size;
 
+	buf = NULL;
 	left_str = initialize_left_str(left_str, &buf);
 	if (!left_str)
 		return (NULL);
-	
 	read_size = 1;
 	while (!ft_strchr(left_str, '\n') && read_size != 0)
 	{

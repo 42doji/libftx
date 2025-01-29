@@ -22,6 +22,7 @@
 # include <limits.h>
 
 char	*get_next_line(int fd);
+char	*ft_get_line(char *left_str);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);
