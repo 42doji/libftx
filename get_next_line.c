@@ -70,7 +70,6 @@ static char	*read_and_append(int fd, char *left_str, char *buf, int *read_size)
 	if (!tmp)
 	{
 		free(buf);
-		free(left_str);
 		return (NULL);
 	}
 	return (tmp);
