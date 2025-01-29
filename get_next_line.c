@@ -116,8 +116,7 @@ char	*get_next_line(int fd)
 	left_str[fd] = ft_read_to_left_str(fd, left_str[fd]);
 	if (!left_str[fd])
 	{
-		if (left_str[fd])
-			free(left_str[fd]);
+		free(left_str[fd]);
 		left_str[fd] = NULL;
 		return (NULL);
 	}
@@ -125,7 +124,6 @@ char	*get_next_line(int fd)
 	if (!line)
 	{
 		free(left_str[fd]);
-		left_str[fd] = NULL;
 		return (NULL);
 	}
 	left_str[fd] = ft_new_left_str(left_str[fd]);
