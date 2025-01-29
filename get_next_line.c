@@ -87,9 +87,13 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 	read_size = 1;
 	while (!ft_strchr(left_str, '\n') && read_size != 0)
 	{
-		left_str = read_and_append(fd, left_str, buf, &read_size);
-		if (!left_str)
+		char *tmp = read_and_append(fd, left_str, buf, &read_size);
+		if (!tmp)
+		{
+			free(left_str);
 			return (NULL);
+		}
+		left_str = tmp;
 	}
 	free(buf);
 	return (left_str);
