@@ -27,10 +27,18 @@ static int	ft_nbrlen(int n)
 	return (i);
 }
 
+static char	*handle_min_int(void)
+{
+	return (ft_strdup("-2147483648"));
+}
+
 char	*ft_itoa(int n)
 {
 	char	*str;
 	int		len;
+
+	if (n == INT_MIN)
+		return (handle_min_int());
 
 	len = ft_nbrlen(n);
 	str = ft_calloc(len + 1, sizeof(char));
@@ -41,11 +49,6 @@ char	*ft_itoa(int n)
 	if (n < 0)
 	{
 		str[0] = '-';
-		if (n == INT_MIN)
-		{
-			str[--len] = '8';
-			n /= 10;
-		}
 		n = -n;
 	}
 	while (len-- && n != 0)
