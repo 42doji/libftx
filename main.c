@@ -1,28 +1,46 @@
 #include "libft.h"
 #include <fcntl.h>
 #include <stdio.h>
+#include <dirent.h>
+#include <string.h>
 
-int main(int argc, char **argv)
+int main(void)
 {
-    int     fd;
-    char    *line;
+    DIR *dir;
+    struct dirent *entry;
+    char filepath[256];
+    char *line;
+    int fd;
 
-    if (argc != 2)
+    dir = opendir("test");
+    if (dir == NULL)
     {
-        printf("사용법: %s <파일 경로>\n", argv[0]);
+        perror("opendir 실패");
         return (1);
     }
-    fd = open(argv[1], O_RDONLY);
-    if (fd < 0)
+
+    while ((entry = readdir(dir)) != NULL)
     {
-        perror("파일 열기 실패");
-        return (1);
+        if (strstr(entry->d_name, ".txt") != NULL)
+        {
+            snprintf(filepath, sizeof(filepath), "test/%s", entry->d_name);
+            printf("Testing file: %s\n", filepath);
+            fd = open(filepath, O_RDONLY);
+            if (fd == -1)
+            {
+                perror("파일 열기 실패");
+                continue;
+            }
+            while ((line = get_next_line(fd)) != NULL)
+            {
+                printf("%s", line);
+                free(line);
+            }
+            close(fd);
+            printf("\n--- %s 종료 ---\n\n", entry->d_name);
+        }
     }
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s", line);
-        free(line);
-    }
-    close(fd);
+
+    closedir(dir);
     return (0);
 }
