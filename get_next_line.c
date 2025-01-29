@@ -92,6 +92,12 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 		}
 		buf[read_size] = '\0';
 		tmp = ft_strjoin(left_str, buf);
+		if (!tmp)
+		{
+			free(buf);
+			free(left_str);
+			return (NULL);
+		}
 		free(left_str);
 		left_str = tmp;
 	}
