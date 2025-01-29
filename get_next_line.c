@@ -98,25 +98,26 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 	return (left_str);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-    char *line;
-    static char *left_str[4096];
+	char		*line;
+	static char	*left_str[4096];
 
-    if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096) return (NULL);
-    left_str[fd] = ft_read_to_left_str(fd, left_str[fd]);
-    if (!left_str[fd])
-    {
-        left_str[fd] = NULL;
-        return (NULL);
-    }
-    line = ft_get_line(left_str[fd]);
-    if (!line)
-    {
-        free(left_str[fd]);
-        left_str[fd] = NULL;
-        return (NULL);
-    }
-    left_str[fd] = ft_new_left_str(left_str[fd]);
-    return (line);
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096)
+		return (NULL);
+	left_str[fd] = ft_read_to_left_str(fd, left_str[fd]);
+	if (!left_str[fd])
+	{
+		left_str[fd] = NULL;
+		return (NULL);
+	}
+	line = ft_get_line(left_str[fd]);
+	if (!line)
+	{
+		free(left_str[fd]);
+		left_str[fd] = NULL;
+		return (NULL);
+	}
+	left_str[fd] = ft_new_left_str(left_str[fd]);
+	return (line);
 }
