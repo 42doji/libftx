@@ -1,0 +1,76 @@
+**Summary of The Norm Version 4.1 (42 School C Programming Standard)**
+
+### **1. Overview**
+The Norm is a programming standard established by 42 School, defining rules for writing C code. It applies to all C projects within the Common Core and any specified projects.
+
+---
+
+### **2. Purpose**
+- **Sequencing:** Encourages simple and clear code structures to ensure readability and avoid complexity.
+- **Consistency:** Maintains a uniform coding style for better collaboration and comprehension.
+- **Long-term Maintenance:** Ensures code is maintainable, readable, and scalable for future modifications.
+
+---
+
+### **3. Coding Rules**
+#### **3.1 Naming Rules**
+- Structs: `s_`, Typedefs: `t_`, Unions: `u_`, Enums: `e_`, Global variables: `g_`.
+- Variables and function names must follow `snake_case` (only lowercase letters, digits, and `_`).
+- Non-standard ASCII characters are prohibited.
+- Names must be meaningful and descriptive.
+
+#### **3.2 Formatting**
+- **Function Length:** Maximum 25 lines.
+- **Line Length:** Maximum 80 characters.
+- **Indentation:** 4-character tab (ASCII 9) must be used.
+- **Spacing Rules:** No consecutive empty lines, unnecessary spaces, or tabulations.
+- **Operators and Symbols:** `,` and `;` must be followed by a space.
+
+#### **3.3 Functions**
+- Maximum 4 named parameters per function.
+- Functions with no parameters must explicitly use `void`.
+- Maximum 5 variable declarations per function.
+- Function return statements must be enclosed in parentheses unless returning `void`.
+
+#### **3.4 Typedef, Struct, Enum, and Union**
+- Spaces required between `struct`, `enum`, `union`, and their names.
+- Consistent indentation for declarations.
+- Structs cannot be declared inside `.c` files.
+
+#### **3.5 Header Files**
+- Headers must include only necessary elements: includes, declarations, defines, prototypes, and macros.
+- Double inclusion must be prevented using macros.
+- No `.c` file can be included inside another `.c` or header file.
+
+#### **3.6 Standard 42 Header**
+- Every `.c` and `.h` file must start with a predefined 42 School header containing author, creation date, and last update information.
+
+#### **3.7 Macros and Preprocessors**
+- `#define` should only be used for constants.
+- Multiline macros and obfuscating macros are prohibited.
+- Macro names must be in uppercase.
+
+#### **3.8 Forbidden Elements**
+The following are strictly prohibited:
+- `for`, `do...while`, `switch`, `case`, `goto`
+- Ternary operators (`? :`)
+- Variable-length arrays (VLAs)
+- Implicit types in variable declarations
+
+#### **3.9 Comments**
+- No inline comments inside function bodies.
+- Comments must be meaningful and in English.
+
+#### **3.10 File Structure**
+- `.c` files cannot include other `.c` files.
+- A `.c` file cannot contain more than 5 function definitions.
+
+#### **3.11 Makefile**
+- `$(NAME)`, `clean`, `fclean`, `re`, and `all` rules are mandatory.
+- A Makefile must not relink unnecessarily.
+- All required source files must be explicitly listed (no `*.c` or `*.o`).
+
+---
+
+### **4. Conclusion**
+The Norm enforces a strict but beneficial coding style, ensuring readability, maintainability, and uniformity across all 42 School C projects. Adhering to these rules helps students develop clean and professional coding habits.
