@@ -90,7 +90,6 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 		char *tmp = read_and_append(fd, left_str, buf, &read_size);
 		if (!tmp)
 		{
-			free(left_str);
 			return (NULL);
 		}
 		left_str = tmp;
