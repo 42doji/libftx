@@ -6,13 +6,13 @@
 /*   By: doji <doji@student.42gyeongsan.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 23:40:58 by doji              #+#    #+#             */
-/*   Updated: 2025/01/28 23:40:58 by doji             ###   ########.fr       */
+/*   Updated: 2025/01/29 17:39:45 by doji             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_memcmp(void *dest, const void *src, size_t n)
+int	ft_memcmp(const void *dest, const void *src, size_t n)
 {
 	unsigned char	*d;
 	unsigned char	*s;

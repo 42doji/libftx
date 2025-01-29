@@ -8,7 +8,7 @@ int main(void)
 {
     DIR *dir;
     struct dirent *entry;
-    char filepath[256];
+    char filepath[512];
     char *line;
     int fd;
 
