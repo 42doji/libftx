@@ -66,41 +66,58 @@ static char	*ft_new_left_str(char *left_str)
 	return (str);
 }
 
-static char	*ft_read_to_left_str(int fd, char *left_str)
+static char	*initialize_left_str(char *left_str, char **buf)
 {
-	char	*buf;
-	char	*tmp;
-	int		read_size;
-
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
+	*buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!*buf)
 		return (NULL);
 	if (!left_str)
 		left_str = ft_strdup("");
 	if (!left_str)
 	{
+		free(*buf);
+		return (NULL);
+	}
+	return (left_str);
+}
+
+static char	*read_and_append(int fd, char *left_str, char *buf, int *read_size)
+{
+	char	*tmp;
+
+	*read_size = read(fd, buf, BUFFER_SIZE);
+	if (*read_size == -1)
+	{
+		free(buf);
+		free(left_str);
+		return (NULL);
+	}
+	buf[*read_size] = '\0';
+	tmp = ft_strjoin(left_str, buf);
+	free(left_str);
+	if (!tmp)
+	{
 		free(buf);
 		return (NULL);
 	}
+	return (tmp);
+}
+
+static char	*ft_read_to_left_str(int fd, char *left_str)
+{
+	char	*buf = NULL;
+	int		read_size;
+
+	left_str = initialize_left_str(left_str, &buf);
+	if (!left_str)
+		return (NULL);
+	
 	read_size = 1;
 	while (!ft_strchr(left_str, '\n') && read_size != 0)
 	{
-		read_size = read(fd, buf, BUFFER_SIZE);
-		if (read_size == -1)
-		{
-			free(buf);
-			free(left_str);
+		left_str = read_and_append(fd, left_str, buf, &read_size);
+		if (!left_str)
 			return (NULL);
-		}
-		buf[read_size] = '\0';
-		tmp = ft_strjoin(left_str, buf);
-		free(left_str);
-		if (!tmp)
-		{
-			free(buf);
-			return (NULL);
-		}
-		left_str = tmp;
 	}
 	free(buf);
 	return (left_str);
