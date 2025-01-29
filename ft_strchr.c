@@ -14,6 +14,9 @@
 
 char	*ft_strchr(const char *s, int c)
 {
+	if (!s)
+		return (NULL);
+
 	char	*ptr;
 
 	ptr = (char *)s;

@@ -112,6 +112,12 @@ char	*get_next_line(int fd)
 		return (NULL);
 	
 	line = ft_get_line(left_str[fd]);
+	if (!line)
+	{
+		free(left_str[fd]);
+		left_str[fd] = NULL;
+		return (NULL);
+	}
 	left_str[fd] = ft_new_left_str(left_str[fd]);
 	return (line);
 }
