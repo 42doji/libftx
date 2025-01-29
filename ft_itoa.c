@@ -39,7 +39,6 @@ char	*ft_itoa(int n)
 
 	if (n == INT_MIN)
 		return (handle_min_int());
-
 	len = ft_nbrlen(n);
 	str = ft_calloc(len + 1, sizeof(char));
 	if (!str)

@@ -83,7 +83,6 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 		free(buf);
 		return (NULL);
 	}
-
 	read_size = 1;
 	while (!ft_strchr(left_str, '\n') && read_size != 0)
 	{
@@ -115,7 +114,6 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096)
 		return (NULL);
-	
 	left_str[fd] = ft_read_to_left_str(fd, left_str[fd]);
 	if (!left_str[fd])
 	{
@@ -124,7 +122,6 @@ char	*get_next_line(int fd)
 		left_str[fd] = NULL;
 		return (NULL);
 	}
-	
 	line = ft_get_line(left_str[fd]);
 	if (!line)
 	{
