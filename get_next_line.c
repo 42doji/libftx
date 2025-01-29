@@ -75,7 +75,6 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
-	
 	if (!left_str)
 		left_str = ft_strdup("");
 	if (!left_str)
