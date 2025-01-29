@@ -75,6 +75,11 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buf)
 		return (NULL);
+	
+	// Initialize left_str to an empty string if it's NULL
+	if (!left_str)
+		left_str = ft_strdup("");
+
 	read_size = 1;
 	while (!ft_strchr(left_str, '\n') && read_size != 0)
 	{
@@ -82,6 +87,7 @@ static char	*ft_read_to_left_str(int fd, char *left_str)
 		if (read_size == -1)
 		{
 			free(buf);
+			free(left_str);
 			return (NULL);
 		}
 		buf[read_size] = '\0';
@@ -98,11 +104,13 @@ char	*get_next_line(int fd)
 	char		*line;
 	static char	*left_str[4096];
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (0);
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd >= 4096)
+		return (NULL);
+	
 	left_str[fd] = ft_read_to_left_str(fd, left_str[fd]);
 	if (!left_str[fd])
 		return (NULL);
+	
 	line = ft_get_line(left_str[fd]);
 	left_str[fd] = ft_new_left_str(left_str[fd]);
 	return (line);
